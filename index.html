@@ -3,6 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Crée des mandalas en quelques clics : symétrie miroir, anneaux, pot de peinture avec dégradés, générateur, animations et mode coloriage. Gratuit, directement dans le navigateur.">
+<meta name="theme-color" content="#10111a">
+<link rel="canonical" href="https://VOTRE-SITE.fr/atelier-mandala.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310111a'/%3E%3Cg fill='none' stroke='%23e9ac3f' stroke-width='3'%3E%3Ccircle cx='32' cy='32' r='20'/%3E%3Cpath d='M32 12c5 6 5 14 0 20-5-6-5-14 0-20ZM32 52c5-6 5-14 0-20-5 6-5 14 0 20ZM12 32c6-5 14-5 20 0-6 5-14 5-20 0ZM52 32c-6-5-14-5-20 0 6 5 14 5 20 0Z'/%3E%3C/g%3E%3C/svg%3E">
+<!-- Aperçu lors d'un partage (WhatsApp, Facebook, Messenger, LinkedIn, X…) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Atelier Mandala">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Atelier Mandala">
+<meta property="og:description" content="Crée des mandalas en quelques clics : symétrie miroir, anneaux, pot de peinture avec dégradés, générateur, animations et mode coloriage. Gratuit, directement dans le navigateur.">
+<meta property="og:url" content="https://VOTRE-SITE.fr/atelier-mandala.html">
+<meta property="og:image" content="https://VOTRE-SITE.fr/og-image.jpg">
+<meta property="og:image:secure_url" content="https://VOTRE-SITE.fr/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Un mandala doré et violet entre les mots Atelier et Mandala">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Atelier Mandala">
+<meta name="twitter:description" content="Crée des mandalas en quelques clics : symétrie miroir, anneaux, pot de peinture avec dégradés, générateur, animations et mode coloriage. Gratuit, directement dans le navigateur.">
+<meta name="twitter:image" content="https://VOTRE-SITE.fr/og-image.jpg">
+<!-- Google Analytics : chargé seulement après accord du visiteur (RGPD) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+  (function () {
+    var GA_ID = 'G-S455FSS28B', KEY = 'atelier-mandala-consent', MAX_AGE = 182 * 24 * 3600 * 1000; // choix gardé 6 mois
+    function read() {
+      try { var o = JSON.parse(localStorage.getItem(KEY)); if (o && Date.now() - o.t < MAX_AGE) return o.v; } catch (e) {}
+      return null;
+    }
+    function load() {
+      if (window.__gaLoaded) return;
+      window.__gaLoaded = true;
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      var s = document.createElement('script');
+      s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    }
+    function clearCookies() {
+      document.cookie.split(';').forEach(function (c) {
+        var n = c.split('=')[0].trim();
+        if (n.indexOf('_ga') !== 0) return;
+        var parts = location.hostname.split('.');
+        for (var i = 0; i < parts.length; i++) document.cookie = n + '=; Max-Age=0; path=/; domain=.' + parts.slice(i).join('.');
+        document.cookie = n + '=; Max-Age=0; path=/';
+      });
+    }
+    window.amConsent = {
+      get: read,
+      set: function (v) {
+        try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {}
+        if (v === 'yes') load();
+        else { gtag('consent', 'update', { analytics_storage: 'denied' }); clearCookies(); }
+      }
+    };
+    if (read() === 'yes') load();
+  })();
+</script>
 <title>Atelier Mandala</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -126,6 +188,7 @@ button { cursor: pointer; }
 }
 .sec { padding: 14px 16px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px; }
 .sec:last-child { border-bottom: 0; }
+.sec details.keys { margin-top: 2px; }
 .sec h2 {
   margin: 0; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);
   display: flex; align-items: center; gap: 8px;
@@ -275,6 +338,19 @@ body.coloring .rail .tool:not([data-coloring]), body.coloring .rail hr { display
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+</style>
+<style>
+.consent {
+  position: fixed; z-index: 40; left: 50%; transform: translateX(-50%);
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: min(560px, calc(100% - 32px));
+  background: var(--surface-2); color: var(--text); border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.5); padding: 16px 18px; display: flex; flex-direction: column; gap: 12px;
+}
+.consent h2 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; }
+.consent p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: #cfc9bb; }
+.consent .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.consent .btn { justify-content: center; }
 </style>
 </head>
 <body>
@@ -489,6 +565,7 @@ body.coloring .rail .tool:not([data-coloring]), body.coloring .rail hr { display
     </div>
 
     <div class="sec">
+      <button class="btn block" id="cookiePrefs" type="button">Cookies et mesure d'audience</button>
       <details class="keys">
         <summary>Raccourcis clavier</summary>
         <dl>
@@ -2329,5 +2406,25 @@ resize();
 })();
 </script>
 
+<div class="consent" id="consentBox" role="dialog" aria-labelledby="consentTitle" hidden>
+  <h2 id="consentTitle">Mesure d'audience</h2>
+  <p>Avec votre accord, Google Analytics compte les visites de cette page pour m'aider à l'améliorer. Aucune publicité, aucun suivi d'un site à l'autre. Refuser ne change rien à l'utilisation de l'atelier, et vous pouvez changer d'avis à tout moment en bas du panneau.</p>
+  <div class="row2">
+    <button class="btn" id="consentNo" type="button">Refuser</button>
+    <button class="btn" id="consentYes" type="button">Accepter</button>
+  </div>
+</div>
+<script>
+(function () {
+  var box = document.getElementById('consentBox');
+  function show() { box.hidden = false; }
+  function choose(v) { window.amConsent.set(v); box.hidden = true; }
+  document.getElementById('consentYes').addEventListener('click', function () { choose('yes'); });
+  document.getElementById('consentNo').addEventListener('click', function () { choose('no'); });
+  var prefs = document.getElementById('cookiePrefs');
+  if (prefs) prefs.addEventListener('click', show);
+  if (window.amConsent.get() === null) show();
+})();
+</script>
 </body>
 </html>
