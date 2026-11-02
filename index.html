@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Crée des mandalas en quelques clics : symétrie miroir, anneaux, pot de peinture avec dégradés, générateur, animations et mode coloriage. Gratuit, directement dans le navigateur.">
 <meta name="theme-color" content="#10111a">
-<link rel="canonical" href="https://VOTRE-SITE.fr/atelier-mandala.html">
+<link rel="canonical" href="https://troplife56-source.github.io/Mandala-atelier/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310111a'/%3E%3Cg fill='none' stroke='%23e9ac3f' stroke-width='3'%3E%3Ccircle cx='32' cy='32' r='20'/%3E%3Cpath d='M32 12c5 6 5 14 0 20-5-6-5-14 0-20ZM32 52c5-6 5-14 0-20-5 6-5 14 0 20ZM12 32c6-5 14-5 20 0-6 5-14 5-20 0ZM52 32c-6-5-14-5-20 0 6 5 14 5 20 0Z'/%3E%3C/g%3E%3C/svg%3E">
 <!-- Aperçu lors d'un partage (WhatsApp, Facebook, Messenger, LinkedIn, X…) -->
 <meta property="og:type" content="website">
@@ -13,9 +13,9 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Atelier Mandala">
 <meta property="og:description" content="Crée des mandalas en quelques clics : symétrie miroir, anneaux, pot de peinture avec dégradés, générateur, animations et mode coloriage. Gratuit, directement dans le navigateur.">
-<meta property="og:url" content="https://VOTRE-SITE.fr/atelier-mandala.html">
-<meta property="og:image" content="https://VOTRE-SITE.fr/og-image.jpg">
-<meta property="og:image:secure_url" content="https://VOTRE-SITE.fr/og-image.jpg">
+<meta property="og:url" content="https://troplife56-source.github.io/Mandala-atelier/">
+<meta property="og:image" content="https://troplife56-source.github.io/Mandala-atelier/og-image.jpg">
+<meta property="og:image:secure_url" content="https://troplife56-source.github.io/Mandala-atelier/og-image.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -23,7 +23,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Atelier Mandala">
 <meta name="twitter:description" content="Crée des mandalas en quelques clics : symétrie miroir, anneaux, pot de peinture avec dégradés, générateur, animations et mode coloriage. Gratuit, directement dans le navigateur.">
-<meta name="twitter:image" content="https://VOTRE-SITE.fr/og-image.jpg">
+<meta name="twitter:image" content="https://troplife56-source.github.io/Mandala-atelier/og-image.jpg">
 <!-- Google Analytics : chargé seulement après accord du visiteur (RGPD) -->
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -293,6 +293,50 @@ details.keys dd { margin: 0; color: #cfc9bb; }
 @media (max-width: 980px) and (min-width: 640px) {
   .stage { max-width: 640px; margin-inline: auto; }
 }
+/* ---------- Compas ---------- */
+.preset-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.preset-grid .btn { justify-content: flex-start; font-size: 0.78rem; padding: 6px 8px; gap: 8px; }
+.preset-grid canvas { width: 26px; height: 26px; flex: none; }
+
+/* ---------- Plein écran ---------- */
+body.focus { overflow: hidden !important; height: 100% !important; }
+body.focus header.top, body.focus .panel, body.focus .statusbar { display: none !important; }
+body.focus .app {
+  position: fixed; inset: 0; display: block; z-index: 15; background: var(--ink);
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+}
+body.focus .stage-col { position: absolute; inset: 64px 76px 12px 76px; }
+body.focus .stage { position: absolute; inset: 0; width: auto !important; height: auto !important; aspect-ratio: auto !important; max-width: none !important; margin: 0 !important; }
+body.focus .rail {
+  position: fixed; z-index: 25; flex-direction: column; overflow: visible;
+  left: calc(10px + env(safe-area-inset-left, 0px)); top: 50%; transform: translateY(-50%); align-self: auto;
+}
+body.focus .rail hr { border-left: 0; border-top: 1px solid var(--line); margin: 2px 4px; }
+.focusbar {
+  position: fixed; z-index: 26; top: calc(10px + env(safe-area-inset-top, 0px)); left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 6px; max-width: calc(100% - 24px); overflow-x: auto;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 6px 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+.focusbar .btn { padding: 6px 9px; flex: none; }
+.focusbar .fsep { width: 1px; align-self: stretch; background: var(--line); flex: none; }
+.focusbar .fcolor { display: grid; place-items: center; width: 34px; height: 30px; flex: none; cursor: pointer; }
+.focusbar .fcolor input { width: 30px; height: 26px; border: 0; padding: 0; background: none; cursor: pointer; }
+.focusbar .fswatches { display: flex; gap: 4px; flex: none; }
+.focusbar .fswatches button { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,.18); padding: 0; flex: none; }
+.focusbar .fswatches button.on { border-color: var(--text); }
+.focusbar .fsym { font-family: var(--font-mono); font-size: 0.85rem; min-width: 26px; text-align: center; color: var(--saffron); flex: none; font-variant-numeric: tabular-nums; }
+@media (max-width: 700px) {
+  body.focus .stage-col { inset: 60px 8px 76px 8px; }
+  body.focus .rail {
+    top: auto; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%);
+    flex-direction: row; max-width: calc(100% - 20px); overflow-x: auto;
+  }
+  body.focus .rail hr { border-top: 0; border-left: 1px solid var(--line); margin: 4px 2px; }
+  .focusbar .lbl, .focusbar .fswatches { display: none; }
+  body.focus .toast { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+}
+
 /* ---------- Mode coloriage ---------- */
 body.coloring .nocolor { display: none !important; }
 body.coloring .rail .tool:not([data-coloring]), body.coloring .rail hr { display: none; }
@@ -367,6 +411,7 @@ body.coloring .rail .tool:not([data-coloring]), body.coloring .rail hr { display
     <button class="btn on" id="guidesBtn" title="Guides (G)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg><span class="lbl">Guides</span></button>
     <button class="btn" id="coloringBtn" title="Mode coloriage (C)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.6-.9 1.6-1.7 0-.5-.2-.9-.4-1.2-.3-.3-.4-.7-.4-1.1 0-.9.7-1.6 1.6-1.6H16a5 5 0 0 0 5-5c0-4-4-7.4-9-7.4Z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10" cy="7" r="1.2" fill="currentColor"/><circle cx="15" cy="7.5" r="1.2" fill="currentColor"/></svg><span class="lbl">Coloriage</span></button>
     <button class="btn" id="galleryBtn" title="Galerie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg><span class="lbl">Galerie</span></button>
+    <button class="btn" id="focusBtn" title="Plein écran (Maj+F)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="lbl">Plein écran</span></button>
     <button class="btn" id="playBtn" title="Animation (P)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span class="lbl">Animer</span></button>
     <button class="btn primary" id="genBtn" title="Générer un mandala (R)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg><span class="lbl">Générer</span></button>
   </div>
@@ -379,6 +424,8 @@ body.coloring .rail .tool:not([data-coloring]), body.coloring .rail hr { display
     <button class="tool" data-tool="brush" title="Pinceau (B)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18.4 3.6a2 2 0 0 1 2.8 2.8L11 16.6 7.4 13Z"/><path d="M7.4 13c-2.4 0-4 1.6-4 4 0 1.7-.8 2.6-1.4 3 4 .8 8-.4 9-3.4"/></svg><span class="key">B</span></button>
     <button class="tool" data-tool="line" title="Ligne (L)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 19 19 5"/><circle cx="5" cy="19" r="1.8" fill="currentColor"/><circle cx="19" cy="5" r="1.8" fill="currentColor"/></svg><span class="key">L</span></button>
     <button class="tool" data-tool="arc" title="Arc (A)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 18C6 8 18 8 20 18"/><circle cx="4" cy="18" r="1.8" fill="currentColor"/><circle cx="20" cy="18" r="1.8" fill="currentColor"/></svg><span class="key">A</span></button>
+    <button class="tool" data-tool="compass" title="Compas (O)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="1.6"/><path d="M11.2 5.5 6 20M12.8 5.5 16 14.5"/><path d="m16 14.5 1.6 4.5"/><path d="M3.5 17.5a10 10 0 0 0 17 0" stroke-dasharray="1.5 2.5"/></svg><span class="key">O</span></button>
+    <button class="tool" data-tool="ruler" title="Règle (D)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><rect x="2.5" y="8.5" width="19" height="7" rx="1.2" transform="rotate(-35 12 12)"/><path d="m7.2 13.6 1.2 1.7M10 11.6l.8 1.1M12.8 9.7l1.2 1.7M15.6 7.7l.8 1.1"/></svg><span class="key">D</span></button>
     <button class="tool" data-tool="bucket" data-coloring="1" title="Pot de peinture (K)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="m11 3 8.5 8.5a1.5 1.5 0 0 1 0 2.1L13.6 19.5a1.5 1.5 0 0 1-2.1 0L4 12l7-7"/><path d="M4 12h15"/><path d="M20.5 16.5s1.5 1.9 1.5 3a1.5 1.5 0 0 1-3 0c0-1.1 1.5-3 1.5-3Z" fill="currentColor"/></svg><span class="key">K</span></button>
     <hr>
     <button class="tool" data-tool="select" title="Sélection (V)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 3 19 12l-6.5 1.6L9.8 20Z"/></svg><span class="key">V</span></button>
@@ -465,6 +512,30 @@ body.coloring .rail .tool:not([data-coloring]), body.coloring .rail hr { display
         <label class="switch"><input type="checkbox" id="ringHalf"><span>Demi-décalage<small>entre les branches</small></span></label>
         <label class="switch"><input type="checkbox" id="ringCircle"><span>Cercle guide<small>tracé avec l'anneau</small></span></label>
       </div>
+    </div>
+
+    <div class="sec nocolor" id="compassSec" hidden>
+      <h2>Compas et règle</h2>
+      <div class="segmented" id="compassMode" style="grid-template-columns:1fr 1fr">
+        <button data-m="circle" class="on">Cercle</button>
+        <button data-m="arc">Arc</button>
+      </div>
+      <div class="field">
+        <div class="lab"><label for="compassR">Écartement</label><output id="compassROut">150</output></div>
+        <input type="range" id="compassR" min="5" max="500" step="1" value="150">
+      </div>
+      <div class="switches">
+        <label class="switch"><input type="checkbox" id="keepRadius"><span>Garder l'écartement<small>un clic = un cercle</small></span></label>
+        <label class="switch"><input type="checkbox" id="rulerExtend"><span>Règle infinie<small>prolonge jusqu'au bord</small></span></label>
+        <label class="switch"><input type="checkbox" id="consNew"><span>Construction<small>trait de crayon à gommer</small></span></label>
+        <label class="switch"><input type="checkbox" id="showCons" checked><span>Voir la construction<small>masquée à l'export</small></span></label>
+      </div>
+      <p class="hint-small">Les points dorés sont les croisements : la pointe et le crayon s'y aimantent. Pour un vrai tracé au compas, réglez Branches sur 1.</p>
+      <div class="field">
+        <div class="lab"><span>Modèles</span></div>
+        <div class="preset-grid" id="presetGrid"></div>
+      </div>
+      <button class="btn block" id="clearConsBtn">Gommer la construction</button>
     </div>
 
     <div class="sec nocolor" id="shapeSec">
@@ -571,6 +642,8 @@ body.coloring .rail .tool:not([data-coloring]), body.coloring .rail hr { display
         <dl>
           <dt>F B L A</dt><dd>Forme, pinceau, ligne, arc</dd>
           <dt>N · K</dt><dd>Anneau, pot de peinture</dd>
+          <dt>O · D</dt><dd>Compas, règle</dd>
+          <dt>Maj+F</dt><dd>Plein écran (Échap pour sortir)</dd>
           <dt>C</dt><dd>Mode coloriage</dd>
           <dt>V E H</dt><dd>Sélection, gomme, main</dd>
           <dt>Espace</dt><dd>Maintenir pour déplacer la vue</dd>
@@ -586,6 +659,20 @@ body.coloring .rail .tool:not([data-coloring]), body.coloring .rail hr { display
     </div>
   </aside>
 </main>
+
+<div class="focusbar" id="focusBar" hidden>
+  <button class="btn" id="fUndo" title="Annuler (Ctrl+Z)" aria-label="Annuler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+  <button class="btn" id="fRedo" title="Rétablir" aria-label="Rétablir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button>
+  <span class="fsep"></span>
+  <label class="fcolor" title="Couleur en cours"><input type="color" id="fColor" aria-label="Couleur en cours"></label>
+  <span class="fswatches" id="fSwatches"></span>
+  <span class="fsep"></span>
+  <button class="btn" id="fSymDown" title="Moins de branches" aria-label="Moins de branches">−</button>
+  <span class="fsym" id="fSym">12</span>
+  <button class="btn" id="fSymUp" title="Plus de branches" aria-label="Plus de branches">+</button>
+  <span class="fsep"></span>
+  <button class="btn" id="fExit" title="Quitter le plein écran (Échap)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg><span class="lbl">Quitter</span></button>
+</div>
 
 <div class="modal" id="galleryModal" hidden role="dialog" aria-modal="true" aria-labelledby="galTitle">
   <div class="modal-card">
@@ -714,8 +801,19 @@ function elemD(e) {
     case 'line': return `M${r1(e.x1)} ${r1(e.y1)}L${r1(e.x2)} ${r1(e.y2)}`;
     case 'arc': { const [cx, cy] = arcControl(e); return `M${r1(e.x1)} ${r1(e.y1)}Q${r1(cx)} ${r1(cy)} ${r1(e.x2)} ${r1(e.y2)}`; }
     case 'stroke': return strokeD(e.pts);
+    case 'compass': {
+      const { cx, cy, r } = e;
+      if (e.full) return `M${r1(cx + r)} ${r1(cy)}A${r1(r)} ${r1(r)} 0 1 1 ${r1(cx - r)} ${r1(cy)}A${r1(r)} ${r1(r)} 0 1 1 ${r1(cx + r)} ${r1(cy)}Z`;
+      const [s, , en] = compassPts(e);
+      return `M${r1(s[0])} ${r1(s[1])}A${r1(r)} ${r1(r)} 0 ${e.a1 - e.a0 > Math.PI ? 1 : 0} 1 ${r1(en[0])} ${r1(en[1])}`;
+    }
   }
   return '';
+}
+/* début, milieu et fin d'un arc de compas (angles en radians, sens horaire à l'écran) */
+function compassPts(e) {
+  const am = (e.a0 + e.a1) / 2;
+  return [[e.cx + e.r * Math.cos(e.a0), e.cy + e.r * Math.sin(e.a0)], [e.cx + e.r * Math.cos(am), e.cy + e.r * Math.sin(am)], [e.cx + e.r * Math.cos(e.a1), e.cy + e.r * Math.sin(e.a1)]];
 }
 const isSvg = (e) => e.kind === 'shape' && e.shape === 'svg';
 const isFillable = (e) => e.kind === 'shape' && !(SHAPES[e.shape] && SHAPES[e.shape].open);
@@ -760,6 +858,7 @@ const S = {
   bucketColor: '#e8743b', bucketAll: true, bucketTol: 1, bucketMode: 'solid', bucketColor2: '#7b3f8c',
   ringOrient: 'out', ringHalf: false, ringCircle: false,
   coloring: false,
+  compassMode: 'circle', keepRadius: false, compassR: 150, cons: false, showCons: true, rulerExtend: false,
 };
 const PAPER = { c1: '#ffffff', c2: '#ffffff', grad: false };
 const currentBg = () => (S.coloring ? PAPER : state.bg);
@@ -874,14 +973,17 @@ function drawEl(c, e, opt = {}) {
   if (opt.anim) c.transform(opt.anim.a, opt.anim.b, opt.anim.c, opt.anim.d, opt.anim.e, opt.anim.f);
   c.lineCap = 'round'; c.lineJoin = 'round';
   c.lineWidth = opt.ink ? Math.max(1.2, e.width) : e.width;
+  // trait de construction : fin, en pointillés, couleur « crayon », jamais rempli
+  if (opt.cons) { c.lineWidth = 1.3 * opt.cons.u; c.setLineDash([6 * opt.cons.u, 5 * opt.cons.u]); }
   for (const cp of copies(e)) {
     c.save();
     const m = cp.m; c.transform(m.a, m.b, m.c, m.d, m.e, m.f);
     const swap = e.alt && cp.odd;
     let sc = swap ? e.color2 : e.color, fc = swap ? e.color : e.color2;
     if (opt.ink) { sc = '#151515'; }
-    if (fillOk && !opt.ink) { c.fillStyle = fc; c.fill(p); }
-    if (e.width > 0 || opt.ink) { c.strokeStyle = sc; c.stroke(p); }
+    if (opt.cons) sc = opt.cons.color;
+    if (fillOk && !opt.ink && !opt.cons) { c.fillStyle = fc; c.fill(p); }
+    if (e.width > 0 || opt.ink || opt.cons) { c.strokeStyle = sc; c.stroke(p); }
     c.restore();
   }
   c.restore();
@@ -942,10 +1044,18 @@ function drawFill(c, e) {
   c.restore();
 }
 /* les zones coloriées passent sous tous les traits, pour que les bords restent nets */
-function drawAll(c, { ink = false, lineArt = S.coloring, animOn = true } = {}) {
+function drawAll(c, { ink = false, lineArt = S.coloring, animOn = true, cons = null } = {}) {
   if (!ink) state.elements.forEach((e) => { if (e.kind === 'fill') drawFill(c, e); });
   const asInk = ink || lineArt;
-  state.elements.forEach((e, i) => { if (e.kind !== 'fill') drawEl(c, e, { anim: animOn && !asInk ? elementAnim(i) : null, ink: asInk }); });
+  state.elements.forEach((e, i) => {
+    if (e.kind === 'fill') return;
+    if (e.cons) { if (cons) drawEl(c, e, { anim: animOn && !asInk ? elementAnim(i) : null, cons }); return; }
+    drawEl(c, e, { anim: animOn && !asInk ? elementAnim(i) : null, ink: asInk });
+  });
+}
+/* style des traits de construction pour l'écran (u = unités du monde par pixel) */
+function consStyle(z) {
+  return { u: 1 / z, color: luminance(currentBg().c1) > 0.55 ? 'rgba(60,60,80,0.5)' : 'rgba(225,218,240,0.5)' };
 }
 
 function dilate(src, N, r) {
@@ -979,7 +1089,7 @@ function buildWalls(tolPx) {
   const g = c.getContext('2d', { willReadFrequently: true });
   g.setTransform(MASK_RES, 0, 0, MASK_RES, 0, 0);
   // en coloriage, les murs sont les traits noirs visibles (les remplissages vectoriels sont masqués)
-  state.elements.forEach((e) => { if (e.kind !== 'fill') drawEl(g, e, { solid: true, ink: S.coloring }); });
+  state.elements.forEach((e) => { if (e.kind !== 'fill' && !e.cons) drawEl(g, e, { solid: true, ink: S.coloring }); });
   const d = g.getImageData(0, 0, N, N).data;
   const wall = new Uint8Array(N * N);
   for (let i = 0, j = 3; i < wall.length; i++, j += 4) wall[i] = d[j] > 50 ? 1 : 0;
@@ -1062,23 +1172,55 @@ function paintBucket(w) {
   });
   toast(open ? 'Zone ouverte : tout l\'espace autour a été rempli. Augmentez la tolérance aux trous ou annulez (Ctrl+Z).' : 'Zone coloriée');
 }
-/* symétrie réelle du dessin : PGCD des branches de tous les tracés, miroir seulement si tous l'ont */
+/* symétrie réelle du dessin.
+   Formes et pinceaux : PGCD de leurs branches. Cercles, arcs de compas et lignes : on vérifie la géométrie,
+   si bien qu'une rosace tracée cercle par cercle au compas est reconnue comme une rosace à 6 branches. */
 function drawingSymmetry() {
-  let g = 0, mirror = true, any = false;
-  // une forme posée pile au centre garde sa propre symétrie (un cercle centré ne contraint rien)
-  const intrinsic = { circle: 0, hexagon: 6, octagon: 8, star5: 5, star6: 6, star8: 8, rosace: 6, pearls: 8, square: 4, triangle: 3 };
+  let g = 0, mirror = true, anyOther = false;
+  // une forme posée pile au centre garde sa propre symétrie
+  const intrinsic = { hexagon: 6, octagon: 8, star5: 5, star6: 6, star8: 8, rosace: 6, pearls: 8, square: 4, triangle: 3 };
+  const prims = [];
   state.elements.forEach((e) => {
-    if (e.kind === 'fill') return;
+    if (e.kind === 'fill' || e.cons) return;
+    const ps = primsOf(e);
+    if (ps) { prims.push(...ps); return; }
     const n = Math.max(1, e.sym | 0);
     if (e.kind === 'shape' && Math.hypot(e.x - C, e.y - C) < 0.5 && e.shape in intrinsic) {
-      if (intrinsic[e.shape]) { any = true; g = gcd(g, n * intrinsic[e.shape]); }
+      anyOther = true; g = gcd(g, n * intrinsic[e.shape]);
       return;
     }
-    any = true;
+    anyOther = true;
     g = gcd(g, n);
     if (!e.mirror) mirror = false;
   });
-  return { sym: g || 1, mirror: any && mirror };
+  if (!prims.length) return { sym: g || 1, mirror: anyOther && mirror };
+  const TOL = 0.9, CELL = 4;
+  const keyOf = (x, y) => Math.round(x / CELL) + ':' + Math.round(y / CELL);
+  const index = new Map();
+  prims.forEach((P) => { const m = primMid(P); const k = keyOf(m[0], m[1]); if (!index.has(k)) index.set(k, []); index.get(k).push(P); });
+  const near = (a, b) => Math.abs(a[0] - b[0]) < TOL && Math.abs(a[1] - b[1]) < TOL;
+  const same = (P, Q) => {
+    if (P.t !== Q.t) return false;
+    if (P.t === 's') return (near(P.a, Q.a) && near(P.b, Q.b)) || (near(P.a, Q.b) && near(P.b, Q.a));
+    if (P.full !== Q.full || Math.abs(P.r - Q.r) > TOL || !near([P.cx, P.cy], [Q.cx, Q.cy])) return false;
+    return P.full || (near(P.m, Q.m) && ((near(P.s, Q.s) && near(P.e, Q.e)) || (near(P.s, Q.e) && near(P.e, Q.s))));
+  };
+  const has = (P) => {
+    const m = primMid(P), cx = Math.round(m[0] / CELL), cy = Math.round(m[1] / CELL);
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+      const list = index.get((cx + dx) + ':' + (cy + dy));
+      if (list && list.some((Q) => same(P, Q))) return true;
+    }
+    return false;
+  };
+  let sym = 1;
+  for (const n of [36, 24, 20, 18, 16, 15, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2]) {
+    if (anyOther && g % n !== 0) continue;
+    const f = rotF(360 / n, C, C);
+    if (prims.every((P) => has(mapPrim(P, f)))) { sym = n; break; }
+  }
+  const mirrorGeo = prims.every((P) => has(mapPrim(P, (x, y) => [2 * C - x, y])));
+  return { sym, mirror: mirrorGeo && (!anyOther || mirror) };
 }
 function hitFill(e, w) {
   if (w.x < e.x || w.y < e.y || w.x > e.x + e.w || w.y > e.y + e.h) return false;
@@ -1158,15 +1300,16 @@ function render() {
     const ref = sel || S;
     drawGuides(ctx, z, Math.max(1, ref.sym | 0), ref.mirror);
   }
-  drawAll(ctx);
-  if (temp) drawEl(ctx, temp, {});
+  drawAll(ctx, { cons: S.showCons && !S.coloring ? consStyle(z) : null });
+  if (temp) drawEl(ctx, temp, temp.cons ? { cons: consStyle(z) } : {});
   else if (ghost) {
     if (S.tool === 'ring' && hover) {
       ctx.save(); ctx.setLineDash([6 / z, 6 / z]); ctx.lineWidth = 1.2 / z; ctx.strokeStyle = 'rgba(233,172,63,0.7)';
       ctx.beginPath(); ctx.arc(C, C, ringRadius(hover), 0, Math.PI * 2); ctx.stroke(); ctx.restore();
     }
-    drawEl(ctx, ghost, { ghost: true });
+    drawEl(ctx, ghost, ghost.cons ? { cons: consStyle(z) } : { ghost: true });
   }
+  if (S.tool === 'compass' || S.tool === 'ruler') drawAids(ctx, z);
   if (sel) drawSelection(ctx, sel, z);
   if (temp && temp.kind === 'arc') {
     ctx.save(); ctx.fillStyle = '#e9ac3f';
@@ -1180,6 +1323,36 @@ function render() {
     ctx.strokeRect(0, 0, W, W); ctx.restore();
   }
   updateMeta();
+}
+
+/* repères du compas : croisements aimantés, point visé, pointe sèche et crayon */
+function drawAids(c, z) {
+  const u = 1 / z, gold = '233,172,63';
+  const g = geometry();
+  c.save();
+  if (g.points.length < 2500) {
+    c.fillStyle = `rgba(${gold},0.55)`;
+    g.points.forEach(([x, y]) => { c.beginPath(); c.arc(x, y, 2.2 * u, 0, TAU); c.fill(); });
+  }
+  if (comp) {
+    c.strokeStyle = `rgba(${gold},0.9)`; c.lineWidth = 1.5 * u;
+    if (comp.phase === 'sweep') {
+      c.setLineDash([4 * u, 5 * u]); c.strokeStyle = `rgba(${gold},0.45)`;
+      c.beginPath(); c.arc(comp.cx, comp.cy, comp.r, 0, TAU); c.stroke();
+      c.strokeStyle = `rgba(${gold},0.9)`;
+    }
+    c.setLineDash([]);
+    c.beginPath(); c.moveTo(comp.cx, comp.cy); c.lineTo(comp.px, comp.py); c.stroke();
+    c.fillStyle = `rgb(${gold})`;
+    c.beginPath(); c.arc(comp.cx, comp.cy, 4.5 * u, 0, TAU); c.fill();
+    c.beginPath(); c.arc(comp.px, comp.py, 3.5 * u, 0, TAU); c.fill();
+  }
+  if (ruler) { c.fillStyle = `rgb(${gold})`; c.beginPath(); c.arc(ruler.x1, ruler.y1, 4 * u, 0, TAU); c.fill(); }
+  if (hoverSnap && hoverSnap.k) {
+    c.strokeStyle = `rgb(${gold})`; c.lineWidth = 2 * u; c.setLineDash([]);
+    c.beginPath(); c.arc(hoverSnap.x, hoverSnap.y, (hoverSnap.k === 'pt' ? 9 : 6) * u, 0, TAU); c.stroke();
+  }
+  c.restore();
 }
 
 /* --- rendu propre pour les exports --- */
@@ -1209,7 +1382,7 @@ function hitTest(w, { fillsOnly = false } = {}) {
   hitCtx.lineCap = 'round'; hitCtx.lineJoin = 'round';
   for (let i = state.elements.length - 1; i >= 0; i--) {
     const e = state.elements[i];
-    if (e.kind === 'fill') continue;
+    if (e.kind === 'fill' || (e.cons && !S.showCons)) continue;
     const p = getPath(e);
     hitCtx.lineWidth = Math.max(e.width, tol);
     for (const cp of copies(e)) {
@@ -1231,6 +1404,7 @@ function mapPoints(e, fn) {
   else if (e.kind === 'line') { [e.x1, e.y1] = fn(e.x1, e.y1); [e.x2, e.y2] = fn(e.x2, e.y2); }
   else if (e.kind === 'arc') { [e.x1, e.y1] = fn(e.x1, e.y1); [e.x2, e.y2] = fn(e.x2, e.y2); [e.mx, e.my] = fn(e.mx, e.my); }
   else if (e.kind === 'stroke') { e.pts = e.pts.map(([x, y]) => fn(x, y)); }
+  else if (e.kind === 'compass') { [e.cx, e.cy] = fn(e.cx, e.cy); }
   else if (e.kind === 'fill') { [e.x, e.y] = fn(e.x, e.y); if (e.gx !== undefined) [e.gx, e.gy] = fn(e.gx, e.gy); }
   touchEl(e);
 }
@@ -1244,9 +1418,11 @@ function duplicateSel(mode) {
     const deg = 180 / Math.max(1, e.sym);
     mapPoints(d, rotF(deg, C, C));
     if (d.kind === 'shape') d.rot = (d.rot + deg) % 360;
+    if (d.kind === 'compass' && !d.full) { d.a0 += deg * Math.PI / 180; d.a1 += deg * Math.PI / 180; }
   } else {
     mapPoints(d, (x, y) => [C + (x - C) * 1.28, C + (y - C) * 1.28]);
     if (d.kind === 'shape') d.size = Math.min(700, d.size * 1.12);
+    if (d.kind === 'compass') d.r *= 1.28;
   }
   state.elements.push(d);
   selectedId = d.id;
@@ -1290,7 +1466,7 @@ function snapPt(w) {
 }
 
 function cancelTemp() {
-  temp = null; linePhase = 'idle'; arcPhase = 'idle';
+  temp = null; linePhase = 'idle'; arcPhase = 'idle'; comp = null; ruler = null;
   updateHint(); requestRender();
 }
 
@@ -1300,7 +1476,7 @@ function setTool(t) {
   if (S.tool !== t) cancelTemp();
   S.tool = t;
   if (t !== 'select') selectedId = null;
-  ghost = null;
+  ghost = null; hoverSnap = null;
   document.querySelectorAll('.tool').forEach((b) => b.classList.toggle('active', b.dataset.tool === t));
   cv.classList.toggle('pan', t === 'pan');
   cv.classList.toggle('select', t === 'select');
@@ -1329,10 +1505,289 @@ function updateGhost() {
   if (!hover || gesture) return;
   if (S.tool === 'shape') { const p = snapPt(hover); ghost = makeShape(p.x, p.y); }
   else if (S.tool === 'ring') ghost = makeRing(ringRadius(hover));
+  else if (S.tool === 'compass' && !comp && S.keepRadius && S.compassMode === 'circle' && hoverSnap) ghost = makeCompass(hoverSnap.x, hoverSnap.y, S.compassR, true);
+}
+
+/* =========================================================
+   Compas et règle : géométrie, points aimantés, modèles de rosaces
+   ========================================================= */
+const TAU = Math.PI * 2;
+const normA = (a) => ((a % TAU) + TAU) % TAU;
+const wrapPi = (a) => { a = normA(a); return a > Math.PI ? a - TAU : a; };
+
+/* primitives géométriques d'un élément, copies symétriques comprises (null si l'élément n'est pas géométrique) */
+function primsOf(e) {
+  let base;
+  if (e.kind === 'line') base = { seg: [[e.x1, e.y1], [e.x2, e.y2]] };
+  else if (e.kind === 'compass') base = { c: [e.cx, e.cy], r: e.r, full: e.full, pts: e.full ? null : compassPts(e) };
+  else if (e.kind === 'shape' && e.shape === 'circle') base = { c: [e.x, e.y], r: e.size / 2, full: true };
+  else return null;
+  return copies(e).map((cp) => {
+    const T = (p) => { const q = cp.m.transformPoint(new DOMPoint(p[0], p[1])); return [q.x, q.y]; };
+    if (base.seg) return { t: 's', a: T(base.seg[0]), b: T(base.seg[1]) };
+    const c = T(base.c);
+    const P = { t: 'c', cx: c[0], cy: c[1], r: base.r, full: base.full };
+    if (!base.full) { const [s, m, en] = base.pts.map(T); setArc(P, s, m, en); }
+    return P;
+  });
+}
+/* complète un arc à partir de ses points début / milieu / fin (gère les reflets qui inversent le sens) */
+function setArc(P, s, m, en) {
+  P.s = s; P.m = m; P.e = en;
+  let a0 = Math.atan2(s[1] - P.cy, s[0] - P.cx), a1 = Math.atan2(en[1] - P.cy, en[0] - P.cx);
+  const am = Math.atan2(m[1] - P.cy, m[0] - P.cx);
+  if (normA(am - a0) > normA(a1 - a0)) [a0, a1] = [a1, a0];
+  P.a0 = a0; P.sweep = normA(a1 - a0) || TAU;
+}
+function primMid(P) { return P.t === 's' ? [(P.a[0] + P.b[0]) / 2, (P.a[1] + P.b[1]) / 2] : (P.full ? [P.cx, P.cy] : P.m); }
+function mapPrim(P, f) {
+  if (P.t === 's') return { t: 's', a: f(P.a[0], P.a[1]), b: f(P.b[0], P.b[1]) };
+  const c = f(P.cx, P.cy);
+  const Q = { t: 'c', cx: c[0], cy: c[1], r: P.r, full: P.full };
+  if (!P.full) setArc(Q, f(P.s[0], P.s[1]), f(P.m[0], P.m[1]), f(P.e[0], P.e[1]));
+  return Q;
+}
+const onArc = (P, x, y) => P.full || normA(Math.atan2(y - P.cy, x - P.cx) - P.a0) <= P.sweep + 1e-6;
+
+function intersect(P, Q) {
+  if (P.t === 'c' && Q.t === 's') return intersect(Q, P);
+  const out = [];
+  if (P.t === 's' && Q.t === 's') {
+    const [x1, y1] = P.a, [x2, y2] = P.b, [x3, y3] = Q.a, [x4, y4] = Q.b;
+    const den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+    if (Math.abs(den) < 1e-9) return out;
+    const t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den;
+    const u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / den;
+    if (t >= -1e-6 && t <= 1 + 1e-6 && u >= -1e-6 && u <= 1 + 1e-6) out.push([x1 + t * (x2 - x1), y1 + t * (y2 - y1)]);
+    return out;
+  }
+  if (P.t === 's') {
+    const [x1, y1] = P.a, [x2, y2] = P.b, dx = x2 - x1, dy = y2 - y1;
+    const fx = x1 - Q.cx, fy = y1 - Q.cy;
+    const a = dx * dx + dy * dy, b = 2 * (fx * dx + fy * dy), c = fx * fx + fy * fy - Q.r * Q.r;
+    const disc = b * b - 4 * a * c;
+    if (a < 1e-9 || disc < 0) return out;
+    const sq = Math.sqrt(disc);
+    for (const t of disc < 1e-9 ? [-b / (2 * a)] : [(-b - sq) / (2 * a), (-b + sq) / (2 * a)]) {
+      if (t < -1e-6 || t > 1 + 1e-6) continue;
+      const x = x1 + t * dx, y = y1 + t * dy;
+      if (onArc(Q, x, y)) out.push([x, y]);
+    }
+    return out;
+  }
+  const dx = Q.cx - P.cx, dy = Q.cy - P.cy, d = Math.hypot(dx, dy);
+  if (d < 1e-6 || d > P.r + Q.r + 1e-6 || d < Math.abs(P.r - Q.r) - 1e-6) return out;
+  const a = (P.r * P.r - Q.r * Q.r + d * d) / (2 * d), h = Math.sqrt(Math.max(0, P.r * P.r - a * a));
+  const mx = P.cx + a * dx / d, my = P.cy + a * dy / d;
+  const cand = h < 1e-6 ? [[mx, my]] : [[mx + h * dy / d, my - h * dx / d], [mx - h * dy / d, my + h * dx / d]];
+  cand.forEach(([x, y]) => { if (onArc(P, x, y) && onArc(Q, x, y)) out.push([x, y]); });
+  return out;
+}
+function nearestOn(P, w) {
+  if (P.t === 's') {
+    const [x1, y1] = P.a, [x2, y2] = P.b, dx = x2 - x1, dy = y2 - y1, L = dx * dx + dy * dy;
+    const t = L ? Math.max(0, Math.min(1, ((w.x - x1) * dx + (w.y - y1) * dy) / L)) : 0;
+    const x = x1 + t * dx, y = y1 + t * dy;
+    return { x, y, d: Math.hypot(w.x - x, w.y - y) };
+  }
+  const dx = w.x - P.cx, dy = w.y - P.cy, L = Math.hypot(dx, dy) || 1;
+  const x = P.cx + P.r * dx / L, y = P.cy + P.r * dy / L;
+  if (!onArc(P, x, y)) return null;
+  return { x, y, d: Math.abs(L - P.r) };
+}
+
+/* toutes les primitives visibles + les points remarquables (centres, extrémités, croisements), en cache */
+let geoCache = { key: '', prims: [], points: [], complete: true };
+function geometry() {
+  const parts = [];
+  for (const e of state.elements) {
+    if (e.kind === 'line' || e.kind === 'compass' || (e.kind === 'shape' && e.shape === 'circle')) {
+      if (e.cons && !S.showCons) continue;
+      parts.push(e.kind, e.x1, e.y1, e.x2, e.y2, e.cx, e.cy, e.r, e.a0, e.a1, e.x, e.y, e.size, e.sym, e.mirror ? 1 : 0);
+    }
+  }
+  const ref = selEl() || S;
+  parts.push(S.guides ? (ref.sym | 0) + (ref.mirror ? 'm' : '') : 'x');
+  const key = parts.join(',');
+  if (key === geoCache.key) return geoCache;
+  const prims = [];
+  state.elements.forEach((e) => { if (e.cons && !S.showCons) return; const ps = primsOf(e); if (ps) prims.push(...ps); });
+  if (S.guides) {
+    const n = Math.max(1, ref.sym | 0), axes = ref.mirror ? 2 * n : n;
+    for (let k = 0; k < axes; k++) {
+      const a = -Math.PI / 2 + TAU * k / axes;
+      prims.push({ t: 's', a: [C, C], b: [C + 520 * Math.cos(a), C + 520 * Math.sin(a)], guide: true });
+    }
+  }
+  const pts = new Map();
+  const add = (p) => { const k = Math.round(p[0] * 2) + ':' + Math.round(p[1] * 2); if (!pts.has(k)) pts.set(k, p); };
+  add([C, C]);
+  prims.forEach((P) => {
+    if (P.t === 's') { if (!P.guide) { add(P.a); add(P.b); } }
+    else { add([P.cx, P.cy]); if (!P.full) { add(P.s); add(P.e); } }
+  });
+  const complete = prims.length <= 700;
+  if (complete) {
+    for (let i = 0; i < prims.length; i++) for (let j = i + 1; j < prims.length; j++) {
+      if (prims[i].guide && prims[j].guide) continue;
+      intersect(prims[i], prims[j]).forEach(add);
+    }
+  }
+  geoCache = { key, prims, points: [...pts.values()], complete };
+  return geoCache;
+}
+/* point aimanté le plus proche : un croisement d'abord, sinon un point sur un trait */
+function geoSnap(w) {
+  const g = geometry();
+  const R = pxToWorld(16);
+  let best = null, bd = R;
+  const consider = (p) => { const d = Math.hypot(p[0] - w.x, p[1] - w.y); if (d < bd) { bd = d; best = { x: p[0], y: p[1], k: 'pt' }; } };
+  g.points.forEach(consider);
+  if (!g.complete) {
+    const local = g.prims.filter((P) => { const q = nearestOn(P, w); return q && q.d < R; });
+    for (let i = 0; i < local.length; i++) for (let j = i + 1; j < local.length; j++) intersect(local[i], local[j]).forEach(consider);
+  }
+  if (best) return best;
+  bd = pxToWorld(9);
+  g.prims.forEach((P) => { const q = nearestOn(P, w); if (q && q.d < bd) { bd = q.d; best = { x: q.x, y: q.y, k: 'curve' }; } });
+  return best || { x: w.x, y: w.y, k: null };
+}
+function extendToBox(x1, y1, x2, y2) {
+  const dx = x2 - x1, dy = y2 - y1;
+  let t0 = -Infinity, t1 = Infinity;
+  for (const [p, d] of [[x1, dx], [y1, dy]]) {
+    if (Math.abs(d) < 1e-9) continue;
+    const a = (0 - p) / d, b = (W - p) / d;
+    t0 = Math.max(t0, Math.min(a, b)); t1 = Math.min(t1, Math.max(a, b));
+  }
+  if (!isFinite(t0) || t0 > t1) return [x1, y1, x2, y2];
+  return [x1 + t0 * dx, y1 + t0 * dy, x1 + t1 * dx, y1 + t1 * dy];
+}
+
+let comp = null;    // geste de compas en cours : { phase: 'radius' | 'sweep', cx, cy, r, px, py, wait, a0, last, acc }
+let ruler = null;   // geste de règle en cours : { x1, y1, wait }
+let hoverSnap = null;
+
+function makeCompass(cx, cy, r, full, a0 = 0, a1 = TAU) {
+  return { id: newId(), kind: 'compass', cx, cy, r, full, a0, a1, ...styleFromS(), fill: false, alt: false, cons: !!S.cons };
+}
+function setCompassR(r) {
+  S.compassR = Math.round(r * 10) / 10;
+  const el = $('#compassR'); if (el) { el.value = Math.round(S.compassR); $('#compassROut').textContent = Math.round(S.compassR); }
+}
+function commitEl(el, msg) {
+  pushHistory();
+  state.elements.push(el);
+  temp = null;
+  if (msg) toast(msg);
+}
+function compassPencil(p) {
+  if (S.keepRadius && comp.locked) {
+    let a = Math.atan2(p.y - comp.cy, p.x - comp.cx);
+    if (Math.hypot(p.x - comp.cx, p.y - comp.cy) < 1e-3) a = -Math.PI / 2;
+    return { x: comp.cx + comp.r * Math.cos(a), y: comp.cy + comp.r * Math.sin(a) };
+  }
+  return { x: p.x, y: p.y };
+}
+function compassUpdate(p) {
+  if (comp.phase === 'radius') {
+    const q = compassPencil(p);
+    comp.px = q.x; comp.py = q.y;
+    if (!comp.locked) comp.r = Math.hypot(q.x - comp.cx, q.y - comp.cy);
+    temp = makeCompass(comp.cx, comp.cy, Math.max(comp.r, 0.1), true);
+  } else if (comp.phase === 'sweep') {
+    const a = Math.atan2(p.y - comp.cy, p.x - comp.cx);
+    comp.acc = Math.max(-TAU, Math.min(TAU, comp.acc + wrapPi(a - comp.last)));
+    comp.last = a;
+    comp.px = comp.cx + comp.r * Math.cos(comp.a0 + comp.acc); comp.py = comp.cy + comp.r * Math.sin(comp.a0 + comp.acc);
+    const lo = Math.min(comp.a0, comp.a0 + comp.acc), hi = Math.max(comp.a0, comp.a0 + comp.acc);
+    temp = makeCompass(comp.cx, comp.cy, comp.r, Math.abs(comp.acc) >= TAU - 0.02, Math.abs(comp.acc) >= TAU - 0.02 ? 0 : lo, Math.abs(comp.acc) >= TAU - 0.02 ? TAU : hi);
+  }
+  if (temp) touchEl(temp);
+}
+/* le crayon du compas est posé : cercle terminé, ou passage au tracé de l'arc */
+function compassRadiusDone() {
+  if (comp.r < pxToWorld(3)) { comp = null; temp = null; return; }
+  setCompassR(comp.r);
+  if (S.compassMode === 'circle') {
+    commitEl(makeCompass(comp.cx, comp.cy, comp.r, true));
+    comp = null;
+  } else {
+    comp.phase = 'sweep'; comp.wait = false;
+    comp.a0 = Math.atan2(comp.py - comp.cy, comp.px - comp.cx); comp.last = comp.a0; comp.acc = 0;
+    temp = null;
+  }
+}
+function compassArcDone() {
+  if (Math.abs(comp.acc) < 0.03) { comp = null; temp = null; return; }
+  if (temp) { const el = temp; temp = null; commitEl(el); }
+  comp = null;
+}
+function compassDown(w) {
+  const p = geoSnap(w);
+  if (!comp) {
+    if (S.keepRadius && S.compassMode === 'circle') {
+      commitEl(makeCompass(p.x, p.y, S.compassR, true));
+      return;
+    }
+    comp = { phase: 'radius', cx: p.x, cy: p.y, r: S.keepRadius ? S.compassR : 0, locked: S.keepRadius, px: p.x, py: p.y, wait: false };
+    gesture = { type: 'compass' };
+    compassUpdate(p);
+    return;
+  }
+  if (comp.phase === 'radius' && comp.wait) { compassUpdate(p); compassRadiusDone(); return; }
+  if (comp.phase === 'sweep') { compassUpdate(p); compassArcDone(); }
+}
+function compassUp() {
+  if (!comp || comp.phase !== 'radius' || comp.wait) return;
+  const moved = comp.locked ? comp.dragged : Math.hypot(comp.px - comp.cx, comp.py - comp.cy) > pxToWorld(6);
+  if (moved) compassRadiusDone();
+  else comp.wait = true;      // simple clic : le prochain clic pose le crayon
+}
+function rulerDown(w) {
+  const p = geoSnap(w);
+  if (ruler && ruler.wait) { rulerFinish(p); return; }
+  ruler = { x1: p.x, y1: p.y, wait: false };
+  temp = { id: newId(), kind: 'line', x1: p.x, y1: p.y, x2: p.x, y2: p.y, ...styleFromS(), fill: false, alt: false, cons: !!S.cons };
+  gesture = { type: 'ruler' };
+}
+function rulerFinish(p) {
+  if (Math.hypot(p.x - ruler.x1, p.y - ruler.y1) < pxToWorld(4)) { ruler = null; temp = null; return; }
+  let [x1, y1, x2, y2] = [ruler.x1, ruler.y1, p.x, p.y];
+  if (S.rulerExtend) [x1, y1, x2, y2] = extendToBox(x1, y1, x2, y2);
+  Object.assign(temp, { x1, y1, x2, y2 });
+  const el = temp; ruler = null;
+  commitEl(el);
+}
+
+/* --- modèles de rosaces --- */
+const PRESETS = {
+  rosace6: { name: 'Rosace 6 pétales', R: 200, build: (R, circ, arc) => [circ(C, C, R), arc(C, C - R, R, Math.PI / 6, 5 * Math.PI / 6, 6)] },
+  seed: { name: 'Graine de vie', R: 130, build: (R, circ) => [circ(C, C, R), circ(C, C - R, R, 6), circ(C, C, 2 * R)] },
+  flower: { name: 'Fleur de vie', R: 105, build: (R, circ) => [circ(C, C, R), circ(C, C - R, R, 6), circ(C + R * Math.sqrt(3) / 2, C - 1.5 * R, R, 6), circ(C, C - 2 * R, R, 6), circ(C, C, 3 * R)] },
+  rosace12: { name: 'Rosace 12', R: 170, build: (R, circ) => [circ(C, C, R), circ(C, C - R, R, 12), circ(C, C, 2 * R)] },
+  star8: { name: 'Étoile à 8 (règle)', R: 380, build: (R, circ, arc, line) => {
+    const v = (k) => [C + R * Math.sin(k * Math.PI / 4), C - R * Math.cos(k * Math.PI / 4)];
+    return [circ(C, C, R), line(...v(0), ...v(3), 8), circ(C, C, R * 0.38)];
+  } },
+};
+function addPreset(key) {
+  const P = PRESETS[key];
+  const st = { ...styleFromS(), fill: false, alt: false, mirror: false, cons: false };
+  const circ = (cx, cy, r, sym = 1) => ({ id: newId(), kind: 'compass', cx, cy, r, full: true, a0: 0, a1: TAU, ...st, sym });
+  const arc = (cx, cy, r, a0, a1, sym = 1) => ({ id: newId(), kind: 'compass', cx, cy, r, full: false, a0, a1, ...st, sym });
+  const line = (x1, y1, x2, y2, sym = 1) => ({ id: newId(), kind: 'line', x1, y1, x2, y2, ...st, sym });
+  pushHistory();
+  state.elements.push(...P.build(P.R, circ, arc, line));
+  setCompassR(P.R);
+  requestRender();
+  toast(P.name + ' ajoutée · le pot de peinture la colorie branche par branche');
 }
 
 function toolDown(w, ev) {
   const t = S.tool;
+  if (t === 'compass') { compassDown(w); updateHint(); requestRender(); return; }
+  if (t === 'ruler') { rulerDown(w); updateHint(); requestRender(); return; }
   if (t === 'shape') {
     pushHistory();
     const p = snapPt(w);
@@ -1381,6 +1836,19 @@ function toolDown(w, ev) {
 
 function toolMove(w) {
   const g = gesture;
+  if (S.tool === 'compass' || S.tool === 'ruler') {
+    hoverSnap = geoSnap(w);
+    if (S.tool === 'compass' && comp) {
+      if (g && g.type === 'compass' && Math.hypot(w.x - comp.cx, w.y - comp.cy) > pxToWorld(6)) comp.dragged = true;
+      compassUpdate(hoverSnap);
+    }
+    if (S.tool === 'ruler' && ruler && temp) {
+      ruler.x2 = hoverSnap.x; ruler.y2 = hoverSnap.y;
+      const pts = S.rulerExtend && Math.hypot(ruler.x2 - ruler.x1, ruler.y2 - ruler.y1) > 1 ? extendToBox(ruler.x1, ruler.y1, ruler.x2, ruler.y2) : [ruler.x1, ruler.y1, ruler.x2, ruler.y2];
+      [temp.x1, temp.y1, temp.x2, temp.y2] = pts; touchEl(temp);
+    }
+    return;
+  }
   if (S.tool === 'line' && temp) {
     if (linePhase === 'drag' || linePhase === 'end') { const p = snapPt(w); temp.x2 = p.x; temp.y2 = p.y; touchEl(temp); }
   } else if (S.tool === 'arc' && temp) {
@@ -1408,6 +1876,15 @@ function toolMove(w) {
 
 function toolUp() {
   const g = gesture;
+  if (S.tool === 'compass') { compassUp(); gesture = null; updateHint(); requestRender(); scheduleSave(); return; }
+  if (S.tool === 'ruler') {
+    if (ruler && !ruler.wait) {
+      const x2 = ruler.x2 ?? ruler.x1, y2 = ruler.y2 ?? ruler.y1;
+      if (Math.hypot(x2 - ruler.x1, y2 - ruler.y1) > pxToWorld(4)) rulerFinish({ x: x2, y: y2 });
+      else ruler.wait = true;
+    }
+    gesture = null; updateHint(); requestRender(); scheduleSave(); return;
+  }
   if (S.tool === 'line' && linePhase === 'drag') {
     if (Math.hypot(temp.x2 - temp.x1, temp.y2 - temp.y1) > pxToWorld(4)) commitTemp();
     else linePhase = 'end';
@@ -1444,6 +1921,7 @@ function eraseAt(w) {
 function abortGesture() {
   if (gesture && gesture.added) dropLastHistory();
   else if (gesture && gesture.type === 'drag' && gesture.moved) dropLastHistory();
+  if ((comp && comp.phase === 'radius' && !comp.wait) || (ruler && !ruler.wait)) cancelTemp();
   gesture = null;
   if (linePhase === 'drag' || arcPhase === 'drag') cancelTemp();
 }
@@ -1603,6 +2081,10 @@ function syncPanel() {
   $('#bucketColor2').value = fillSel ? (sel.color2 || sel.color) : S.bucketColor2;
   $('#bucketColor2Code').textContent = $('#bucketColor2').value;
   $('#ringSec').hidden = S.tool !== 'ring';
+  $('#compassSec').hidden = !(S.tool === 'compass' || S.tool === 'ruler');
+  document.querySelectorAll('#compassMode button').forEach((b) => b.classList.toggle('on', b.dataset.m === S.compassMode));
+  $('#keepRadius').checked = S.keepRadius; $('#consNew').checked = S.cons; $('#showCons').checked = S.showCons; $('#rulerExtend').checked = S.rulerExtend;
+  $('#compassR').value = Math.round(S.compassR); $('#compassROut').textContent = Math.round(S.compassR);
   document.querySelectorAll('#ringOrient button').forEach((b) => b.classList.toggle('on', b.dataset.o === S.ringOrient));
   $('#ringHalf').checked = S.ringHalf; $('#ringCircle').checked = S.ringCircle;
   document.body.classList.toggle('coloring', S.coloring);
@@ -1612,8 +2094,9 @@ function syncPanel() {
   $('#bucketAll').checked = S.bucketAll;
   $('#bucketTol').value = S.bucketTol; $('#bucketTolOut').textContent = S.bucketTol;
   if (sel) {
-    const names = { shape: 'Forme', line: 'Ligne', arc: 'Arc', stroke: 'Trait de pinceau', fill: 'Zone coloriée' };
-    const nm = sel.kind === 'shape' ? (isSvg(sel) ? (sel.name || 'SVG importé') : SHAPES[sel.shape].name) : names[sel.kind];
+    const names = { shape: 'Forme', line: 'Ligne', arc: 'Arc', stroke: 'Trait de pinceau', fill: 'Zone coloriée', compass: sel.full ? 'Cercle au compas' : 'Arc au compas' };
+    let nm = sel.kind === 'shape' ? (isSvg(sel) ? (sel.name || 'SVG importé') : SHAPES[sel.shape].name) : names[sel.kind];
+    if (sel.cons) nm += ' (construction)';
     $('#targetTitle').textContent = nm;
     $('#targetSub').textContent = 'Élément sélectionné : les réglages le modifient directement. Glissez sur le dessin pour le déplacer.';
   } else {
@@ -1621,11 +2104,13 @@ function syncPanel() {
     $('#targetSub').textContent = 'Les réglages ci-dessous s\'appliquent à ce que vous allez dessiner.';
   }
   const showShape = S.tool === 'shape' || S.tool === 'ring' || (sel && sel.kind === 'shape');
+  $('#targetBox').parentElement.hidden = false;
   $('#shapeSec').hidden = !showShape;
   const curShape = sel && sel.kind === 'shape' ? (isSvg(sel) ? null : sel.shape) : S.shape;
   document.querySelectorAll('.shape-btn').forEach((b) => b.classList.toggle('on', b.dataset.shape === curShape));
   $('#shapeTag').textContent = curShape && SHAPES[curShape] ? SHAPES[curShape].name : 'SVG importé';
   updateLabels();
+  syncFocusBar();
 }
 
 function syncBg() {
@@ -1674,6 +2159,120 @@ document.querySelectorAll('#ringOrient button').forEach((b) => b.addEventListene
 }));
 $('#bucketAll').addEventListener('change', () => { S.bucketAll = $('#bucketAll').checked; updateHint(); scheduleSave(); });
 $('#bucketTol').addEventListener('input', () => { S.bucketTol = parseInt($('#bucketTol').value, 10); $('#bucketTolOut').textContent = S.bucketTol; scheduleSave(); });
+
+/* --- réglages du compas et de la règle --- */
+document.querySelectorAll('#compassMode button').forEach((b) => b.addEventListener('click', () => {
+  S.compassMode = b.dataset.m; cancelTemp(); syncPanel(); updateHint(); scheduleSave();
+}));
+$('#compassR').addEventListener('input', () => {
+  S.compassR = parseInt($('#compassR').value, 10); $('#compassROut').textContent = S.compassR;
+  updateGhost(); requestRender(); scheduleSave();
+});
+[['keepRadius', 'keepRadius'], ['consNew', 'cons'], ['showCons', 'showCons'], ['rulerExtend', 'rulerExtend']].forEach(([id, prop]) => {
+  $('#' + id).addEventListener('change', () => {
+    S[prop] = $('#' + id).checked;
+    if (prop === 'keepRadius') cancelTemp();
+    updateHint(); updateGhost(); requestRender(); scheduleSave();
+  });
+});
+$('#clearConsBtn').addEventListener('click', () => {
+  if (!state.elements.some((e) => e.cons)) { toast('Aucun trait de construction à gommer.'); return; }
+  pushHistory();
+  state.elements = state.elements.filter((e) => !e.cons);
+  selectedId = null; syncPanel(); requestRender();
+  toast('Construction gommée · Ctrl+Z pour la retrouver');
+});
+(function renderPresets() {
+  const grid = $('#presetGrid');
+  Object.entries(PRESETS).forEach(([key, P]) => {
+    const b = document.createElement('button');
+    b.className = 'btn'; b.type = 'button';
+    // petite vignette dessinée avec les vraies primitives du modèle
+    const c = document.createElement('canvas'); c.width = 52; c.height = 52;
+    const g = c.getContext('2d');
+    const els = P.build(P.R,
+      (cx, cy, r, sym = 1) => ({ kind: 'compass', cx, cy, r, full: true, a0: 0, a1: TAU, sym }),
+      (cx, cy, r, a0, a1, sym = 1) => ({ kind: 'compass', cx, cy, r, full: false, a0, a1, sym }),
+      (x1, y1, x2, y2, sym = 1) => ({ kind: 'line', x1, y1, x2, y2, sym }));
+    let ext = 0;
+    els.forEach((e) => { ext = Math.max(ext, e.kind === 'line' ? Math.max(Math.hypot(e.x1 - C, e.y1 - C), Math.hypot(e.x2 - C, e.y2 - C)) : Math.hypot(e.cx - C, e.cy - C) + e.r); });
+    const sc = 23 / ext;
+    g.setTransform(sc, 0, 0, sc, 26 - C * sc, 26 - C * sc);
+    g.strokeStyle = '#e9ac3f'; g.lineWidth = 1.6 / sc;
+    els.forEach((e) => copies(e).forEach((cp) => { g.save(); const m = cp.m; g.transform(m.a, m.b, m.c, m.d, m.e, m.f); g.stroke(new Path2D(elemD(e))); g.restore(); }));
+    b.append(c, document.createTextNode(P.name));
+    b.addEventListener('click', () => addPreset(key));
+    grid.appendChild(b);
+  });
+})();
+
+/* =========================================================
+   Plein écran : la toile seule, avec l'outil et les réglages en cours
+   ========================================================= */
+function focusColorInput() {
+  const sel = selEl();
+  if ((S.tool === 'bucket' && !sel) || (sel && sel.kind === 'fill')) return $('#bucketColor');
+  return $('#color');
+}
+function syncFocusBar() {
+  if ($('#focusBar').hidden) return;
+  const src = focusColorInput();
+  $('#fColor').value = src.value;
+  $('#fSym').textContent = (selEl() || S).sym ?? S.sym;
+  const wrap = $('#fSwatches');
+  const cols = S.coloring ? COLORING_COLORS.slice(0, 8) : PALETTES[S.palette].colors;
+  if (wrap.dataset.key !== cols.join()) {
+    wrap.innerHTML = '';
+    cols.forEach((col) => {
+      const b = document.createElement('button');
+      b.style.background = col; b.dataset.c = col; b.title = col; b.setAttribute('aria-label', 'Couleur ' + col);
+      b.addEventListener('click', () => setFocusColor(col));
+      wrap.appendChild(b);
+    });
+    wrap.dataset.key = cols.join();
+  }
+  wrap.querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.c.toLowerCase() === src.value.toLowerCase()));
+}
+function setFocusColor(col) {
+  const el = focusColorInput();
+  el.value = col; el.dispatchEvent(new Event('input')); el.dispatchEvent(new Event('change'));
+  syncFocusBar();
+}
+let focusViaApi = false;
+function setFocus(on) {
+  document.body.classList.toggle('focus', on);
+  $('#focusBar').hidden = !on;
+  $('#focusBtn').classList.toggle('on', on);
+  if (on) {
+    syncFocusBar();
+    const root = document.documentElement;
+    if (root.requestFullscreen && !document.fullscreenElement) {
+      root.requestFullscreen().then(() => { focusViaApi = true; }).catch(() => { focusViaApi = false; });
+    }
+    toast('Plein écran · Échap pour revenir');
+  } else if (document.fullscreenElement && document.exitFullscreen) {
+    focusViaApi = false;
+    document.exitFullscreen().catch(() => {});
+  }
+  requestAnimationFrame(resize);
+}
+document.addEventListener('fullscreenchange', () => {
+  // Échap du navigateur : on quitte aussi le mode plein écran de l'atelier
+  if (!document.fullscreenElement && focusViaApi && document.body.classList.contains('focus')) { focusViaApi = false; setFocus(false); }
+});
+$('#focusBtn').addEventListener('click', () => setFocus(!document.body.classList.contains('focus')));
+$('#fExit').addEventListener('click', () => setFocus(false));
+$('#fUndo').addEventListener('click', undo);
+$('#fRedo').addEventListener('click', redo);
+$('#fColor').addEventListener('input', () => setFocusColor($('#fColor').value));
+function stepSym(d) {
+  const el = $('#sym');
+  el.value = Math.max(1, Math.min(36, parseInt(el.value, 10) + d));
+  el.dispatchEvent(new Event('input')); el.dispatchEvent(new Event('change'));
+  syncFocusBar();
+}
+$('#fSymDown').addEventListener('click', () => stepSym(-1));
+$('#fSymUp').addEventListener('click', () => stepSym(1));
 
 /* --- bibliothèque de formes --- */
 function shapeIcon(cmdsOrPath, isOpen) {
@@ -2093,7 +2692,7 @@ function buildSvg() {
   });
   const inkMode = S.coloring;
   state.elements.forEach((e) => {
-    if (e.kind === 'fill') return;
+    if (e.kind === 'fill' || e.cons) return;
     const svg = isSvg(e);
     const d = svg ? e.svgD : elemD(e);
     let inner = '', sw = e.width;
@@ -2327,6 +2926,11 @@ function updateHint() {
     erase: 'Cliquez ou glissez sur un tracé pour l\'effacer.',
     pan: 'Glissez pour déplacer la vue. Molette ou deux doigts pour zoomer.',
     ring: 'Bougez pour choisir le rayon, cliquez pour poser l\'anneau entier.',
+    ruler: ruler && ruler.wait ? 'Cliquez le deuxième point de la droite.' : 'Glissez d\'un point à un autre. Les croisements s\'aimantent.',
+    compass: !comp
+      ? (S.keepRadius && S.compassMode === 'circle' ? 'Écartement bloqué : chaque clic pique le compas et trace le cercle.' : 'Piquez la pointe (un croisement s\'aimante), puis écartez jusqu\'au rayon voulu.')
+      : comp.phase === 'radius' ? (comp.wait ? 'Cliquez où poser le crayon.' : 'Relâchez pour poser le crayon.')
+      : 'Tournez autour de la pointe pour tracer l\'arc, puis cliquez. Échap annule.',
     bucket: S.bucketAll ? 'Cliquez dans une zone fermée : elle est coloriée sur toutes les branches.' : 'Cliquez dans une zone fermée pour la colorier.',
   };
   let txt = h[S.tool] || '';
@@ -2362,10 +2966,16 @@ window.addEventListener('keydown', (ev) => {
   if (mod && ev.key.toLowerCase() === 'd') { ev.preventDefault(); duplicateSel('half'); return; }
   if (typing || mod || ev.altKey) return;
   if (ev.key === ' ') { if (!spaceDown) { spaceDown = true; cv.classList.add('pan'); } ev.preventDefault(); return; }
-  if (ev.key === 'Escape') { cancelTemp(); selectedId = null; syncPanel(); requestRender(); return; }
+  if (ev.key === 'Escape') {
+    const busy = temp || comp || ruler || selEl();
+    cancelTemp(); selectedId = null; syncPanel(); requestRender();
+    if (!busy && document.body.classList.contains('focus')) setFocus(false);
+    return;
+  }
+  if (ev.shiftKey && ev.key.toLowerCase() === 'f') { setFocus(!document.body.classList.contains('focus')); return; }
   if (ev.key === 'Delete' || ev.key === 'Backspace') { if (selEl()) { ev.preventDefault(); deleteSel(); } return; }
   const k = ev.key.toLowerCase();
-  const tools = { f: 'shape', n: 'ring', b: 'brush', l: 'line', a: 'arc', k: 'bucket', v: 'select', e: 'erase', h: 'pan' };
+  const tools = { f: 'shape', n: 'ring', b: 'brush', l: 'line', a: 'arc', o: 'compass', d: 'ruler', k: 'bucket', v: 'select', e: 'erase', h: 'pan' };
   if (tools[k]) { setTool(tools[k]); return; }
   if (k === 'c') { setColoring(!S.coloring); return; }
   if (k === 'r' && S.coloring) { newColoringPage(); return; }
